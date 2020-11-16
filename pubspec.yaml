@@ -1,0 +1,63 @@
+name: plutter
+description: A new Flutter project.
+
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^1.0.0
+  image_picker:
+  file_picker:
+  material_design_icons_flutter:
+  camera:
+  path_provider:
+  path:
+  firebase_core: ^0.5.2
+  cloud_firestore: ^0.14.3
+  firebase_storage: ^5.0.1
+  # firebase_core: "^0.5.2"
+  # firebase_auth: "^0.18.3"
+  # cloud_firestore: "^0.14.3"
+  # cloud_functions: "^0.7.0+1"
+  # firebase_storage: "^5.0.1"
+  # firebase_messaging: "^8.0.0-dev.8"
+  # firebase_admob: "^0.10.2"
+  # firebase_analytics: "^6.2.0"
+  # firebase_database: "^4.3.0"
+  # firebase_dynamic_links: "^0.6.2"
+  # firebase_in_app_messaging: "^0.2.2"
+  # firebase_performance: "^0.4.2"
+  # firebase_remote_config: "^0.4.2"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+ 
+  uses-material-design: true
+
+
+  assets:
+      
+    - assets/images/profile.png
+    - assets/images/plutterSplash.jpeg
+
+
+  fonts:
+    - family: Satisfy
+      fonts:
+        - asset: assets/fonts/Satisfy.ttf

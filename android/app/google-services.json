@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "536999044744",
+    "firebase_url": "https://plutter-4daa4.firebaseio.com",
+    "project_id": "plutter-4daa4",
+    "storage_bucket": "plutter-4daa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536999044744:android:f84d4e4d080d1acf5b213d",
+        "android_client_info": {
+          "package_name": "com.example.plutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536999044744-lv5l2rhks3ks6vim8bei0kd04pmofvj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoWdoMLhRv3YbVPV1ZxVKhk19YgKop6Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536999044744-lv5l2rhks3ks6vim8bei0kd04pmofvj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

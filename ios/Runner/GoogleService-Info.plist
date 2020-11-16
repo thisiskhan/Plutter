@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>536999044744-ren074ulb1g11kgmbj523ro6er0hhnvp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.536999044744-ren074ulb1g11kgmbj523ro6er0hhnvp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAdm-VryZcB5EYx5cIyP398IJ5UOT099a0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>536999044744</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.plutter</string>
+	<key>PROJECT_ID</key>
+	<string>plutter-4daa4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>plutter-4daa4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:536999044744:ios:02798b6efb9ba2055b213d</string>
+	<key>DATABASE_URL</key>
+	<string>https://plutter-4daa4.firebaseio.com</string>
+</dict>
+</plist>

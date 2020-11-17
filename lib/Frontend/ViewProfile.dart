@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Frontend/ChatRoom.dart';
 import 'package:plutter/Frontend/Eshop.dart';
-
 import 'ViewPosts.dart';
-import 'Login.dart';
+
 
 class ViewProfile extends StatefulWidget {
   @override
@@ -39,15 +38,7 @@ class _ViewProfileState extends State<ViewProfile>
                   )),
             ),
             actions: <Widget>[
-              // GestureDetector(
-              //     onTap: () {},
-              //     child: Padding(
-              //       padding: const EdgeInsets.only(
-              //         right: 15,
-              //       ),
-              //       child:
-              //           Icon(MdiIcons.shoppingOutline, color: Colors.black),
-              //     )),
+         
               GestureDetector(
                   onTap: () {},
                   child: Padding(
@@ -244,7 +235,7 @@ class _ViewProfileState extends State<ViewProfile>
               ],
             ),
 
-            Divider(),
+            // Divider(),
             SizedBox(height: 300),
           ],
         ),
@@ -473,7 +464,7 @@ class _ViewProfileState extends State<ViewProfile>
                       side: BorderSide(color: Colors.grey))),
             ],
           ),
-          Divider(),
+          // Divider(),
         ],
       ),
     ));
@@ -630,7 +621,7 @@ class _ViewProfileState extends State<ViewProfile>
                         side: BorderSide(color: Colors.grey))),
               ],
             ),
-            Divider(),
+            // Divider(),
           ],
         ),
       ),

@@ -284,7 +284,7 @@ class _ViewProfileState extends State<ViewProfile>
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ViewPost()));
               }),
-          Divider(),
+          //     Divider(),
           ListTile(
               title: Text('E-shop',
                   style: TextStyle(
@@ -299,7 +299,7 @@ class _ViewProfileState extends State<ViewProfile>
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Eshop()));
               }),
-          Divider(),
+          //     Divider(),
           ListTile(
               title: Text('Website',
                   style: TextStyle(
@@ -307,7 +307,7 @@ class _ViewProfileState extends State<ViewProfile>
                       fontSize: 20)),
               leading: Icon(MdiIcons.web, color: Colors.black, size: 25),
               onTap: () {}),
-          Divider(),
+          //    Divider(),
           ListTile(
               title: Text('Contact us',
                   style: TextStyle(
@@ -316,7 +316,7 @@ class _ViewProfileState extends State<ViewProfile>
               leading:
                   Icon(MdiIcons.contactsOutline, color: Colors.black, size: 25),
               onTap: () {}),
-          Divider(),
+          //      Divider(),
           ListTile(
               title: Text('Growth',
                   style: TextStyle(
@@ -328,7 +328,7 @@ class _ViewProfileState extends State<ViewProfile>
                 color: Colors.black,
               ),
               onTap: () {}),
-          Divider(),
+          // Divider(),
           ListTile(
             title: Text('Report this Social', style: TextStyle(fontSize: 20)),
             leading: Icon(
@@ -338,7 +338,7 @@ class _ViewProfileState extends State<ViewProfile>
             ),
             onTap: () {},
           ),
-          Divider()
+          // Divider()
         ],
       ),
     );
@@ -508,7 +508,7 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(),
+        // Divider(),
         ListTile(
           title: Text('Share',
               style: TextStyle(
@@ -521,7 +521,7 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(),
+        // Divider(),
         ListTile(
           title: Text('Report this channel',
               style: TextStyle(
@@ -534,9 +534,9 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(
-          height: 20.0,
-        ),
+        // Divider(
+        //   height: 20.0,
+        // ),
       ],
     ));
   }
@@ -666,7 +666,7 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(),
+        // Divider(),
         ListTile(
           title: Text('Share Joining Link',
               style: TextStyle(
@@ -679,7 +679,7 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(),
+        // Divider(),
         ListTile(
           title: Text('Report this Community',
               style: TextStyle(
@@ -692,9 +692,9 @@ class _ViewProfileState extends State<ViewProfile>
           ),
           onTap: () {},
         ),
-        Divider(
-          height: 20.0,
-        ),
+        // Divider(
+        //   height: 20.0,
+        // ),
       ],
     ));
   }

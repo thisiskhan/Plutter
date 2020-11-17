@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -37,7 +36,7 @@ class _EshopState extends State<Eshop> {
   Widget userProducts() {
     return Scaffold(
       body: GridView.count(
-          crossAxisCount: 1,
+          crossAxisCount: 2,
           children: List.generate(
               30,
               (index) => Card(
@@ -49,17 +48,6 @@ class _EshopState extends State<Eshop> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: IconButton(
-                              tooltip: "Add to bag",
-                              icon: Icon(
-                                MdiIcons.shoppingOutline,
-                                color: Colors.black,
-                                size: 25,
-                              ),
-                              onPressed: null),
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: IconButton(
@@ -85,14 +73,25 @@ class _EshopState extends State<Eshop> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: IconButton(
-                              tooltip: "Book Mark",
+                              tooltip: "Add to bag",
                               icon: Icon(
-                                MdiIcons.bookmarkOutline,
+                                MdiIcons.shoppingOutline,
                                 color: Colors.black,
                                 size: 25,
                               ),
                               onPressed: null),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(10),
+                        //   child: IconButton(
+                        //       tooltip: "Book Mark",
+                        //       icon: Icon(
+                        //         MdiIcons.bookmarkOutline,
+                        //         color: Colors.black,
+                        //         size: 25,
+                        //       ),
+                        //       onPressed: null),
+                        // ),
                       ],
                     ),
                   )))),

@@ -177,15 +177,14 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // Future<void> login() async {
-  //   final formState = _formKey.currentState;
-  //   if (formState.validate()) {
-  //     try {
-  //       UserCredential user = await FirebaseAuth.instance
-  //           .signInWithEmailAndPassword(email: email, password: password);
-  //     } catch (e) {}
-  //   }
-  // }
+
+  Future<void> login(){
+    
+  }
+
+
+
+
 }
 
 // Channel page.

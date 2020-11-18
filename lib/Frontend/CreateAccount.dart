@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 import 'Createchannelpage.dart';
-
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -87,10 +85,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       validator: (input) {
                         if (input.isEmpty) {
                           return RegExp(
-                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(input)
-                              ? null
-                              : "Please Provide a valid email id";
+                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(input) ? null : "Please Provide a valid email id";
                         }
                       },
                       decoration: InputDecoration(

@@ -52,12 +52,13 @@ class _LoginState extends State<Login> {
                   Container(
                       child: TextFormField(
                     controller: _emailController,
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
+                   // ignore: missing_return
+                   validator: (input) {
+                        if (input.isEmpty) {
+                          return RegExp(
+                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(input) ? null : "Please Provide a valid email id";
+                        }
+                      },
                     onChanged: (val) {
                       setState(() => email = val);
                     },
@@ -707,5 +708,3 @@ class CreditCard extends StatelessWidget {
 //Account setting page
 
 //ViewPost screen
-
-

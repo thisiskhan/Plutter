@@ -30,7 +30,7 @@ dependencies:
   #firebase_auth: "^0.18.3"
   # cloud_firestore: "^0.14.3"
   # cloud_functions: "^0.7.0+1"
-  firebase_storage: "^5.0.1"
+  
   # firebase_messaging: "^8.0.0-dev.8"
   # firebase_admob: "^0.10.2"
   # firebase_analytics: "^6.2.0"

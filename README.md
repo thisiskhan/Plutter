@@ -1,4 +1,4 @@
-# plutter
+# Plutter
 
 A new Flutter project.
 

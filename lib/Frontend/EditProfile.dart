@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plutter/Frontend/communityEdit.dart';
 import 'ChannelEdit.dart';
 import 'SocialEdit.dart';
 
@@ -142,7 +143,10 @@ class _EditProfileState extends State<EditProfile> {
 
   Widget commnityPageEdit() {
     return GestureDetector(
-      onTap: () {},
+        onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => CommunityEdit()));
+      },
       child: Card(
         shape: StadiumBorder(
           side: BorderSide(
@@ -229,6 +233,10 @@ class _EditProfileState extends State<EditProfile> {
                 child: InkWell(
                     onTap: () {
                       showModalBottomSheet(
+                           shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(10.0)),
+                              ),
                           context: context,
                           builder: ((builder) => bottomSheet()));
                     },
@@ -268,7 +276,7 @@ class _EditProfileState extends State<EditProfile> {
             height: 20,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton.icon(
                   onPressed: () {

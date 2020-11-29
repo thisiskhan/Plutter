@@ -134,6 +134,10 @@ class _ChannelEditState extends State<ChannelEdit> {
                 child: InkWell(
                     onTap: () {
                       showModalBottomSheet(
+                           shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(10.0)),
+                              ),
                           context: context,
                           builder: ((builder) => channelottomSheet()));
                     },
@@ -182,7 +186,7 @@ class _ChannelEditState extends State<ChannelEdit> {
             height: 20,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               FlatButton.icon(
                   onPressed: () {

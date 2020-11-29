@@ -1,136 +1,59 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/widgets.dart';
 
-
-class SocialEdit extends StatefulWidget {
+class CommunityEdit extends StatefulWidget {
   @override
-  _SocialEditState createState() => _SocialEditState();
+  _CommunityEditState createState() => _CommunityEditState();
 }
 
-class _SocialEditState extends State<SocialEdit> {
-  final _socialProfileKey = GlobalKey<FormState>();
-  PickedFile _imageFile;
+class _CommunityEditState extends State<CommunityEdit> {
+final _communityProfileKey = GlobalKey<FormState>();
+   PickedFile _imageFile;
   final ImagePicker _picker = ImagePicker();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 1,
         title: Text(
-          "Edit Social Profile",
+          "Edit Community Profile",
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Form(
-            key: _socialProfileKey,
-            child: ListView(
+          key: _communityProfileKey,
+          child: ListView(
               children: [
-                socialProfileImage(),
-                SizedBox(
+                 communityProfileImage(),
+                  SizedBox(
                   height: 10,
                 ),
-                nameTextField(),
-                SizedBox(
+                 communityDescription(),
+                  SizedBox(
                   height: 10,
                 ),
-                socialBio(),
-                SizedBox(
+                communityWeb(),
+                 SizedBox(
                   height: 10,
                 ),
-                socialGithub(),
-                SizedBox(
+                communityGithub(),
+                  SizedBox(
                   height: 10,
                 ),
-                socialWeb(),
-                SizedBox(
-                  height: 10,
-                ),
-                socialDOB(),
-                SizedBox(
-                  height: 10,
-                ),
-                savebutton(),
+                 savebutton(),
               ],
-            )),
-      ),
-    );
-  }
-
-  Widget nameTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          border:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-          labelText: 'Name'),
-    );
-  }
-
-  Widget socialBio() {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-        labelText: 'Bio',
-      
-      ),
-      maxLines: 3,
-    );
-  }
-
-  Widget socialWeb() {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-        labelText: 'Website',
-      ),
-    );
-  }
-
-  Widget socialGithub() {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-        labelText: 'Github Username',
-      ),
-    );
-  }
-
-  Widget socialDOB() {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-        labelText: 'Date of birth',
-      ),
-    );
-  }
-
-  Widget savebutton() {
-    return Center(
-      widthFactor: 150,
-      child: RawMaterialButton(
-          onPressed: () {},
-          fillColor: Colors.blue[800],
-          child: Text(
-            'Save',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          )),
+        ),
+        )
     );
   }
-
-  void takePhoto(ImageSource source) async {
+ void takePhoto(ImageSource source) async {
     final PickedFile = await _picker.getImage(
       source: source,
     );
@@ -139,8 +62,8 @@ class _SocialEditState extends State<SocialEdit> {
     });
   }
 
-  Widget socialProfileImage() {
-    return Center(
+  Widget communityProfileImage(){
+     return Center(
       child: Stack(
         children: <Widget>[
           Column(
@@ -163,7 +86,7 @@ class _SocialEditState extends State<SocialEdit> {
                                     top: Radius.circular(10.0)),
                               ),
                           context: context,
-                          builder: ((builder) => socialbottomSheet()));
+                          builder: ((builder) => communitybottomSheet()));
                     },
                     child: Text(
                       'Change Profile',
@@ -180,8 +103,57 @@ class _SocialEditState extends State<SocialEdit> {
       ),
     );
   }
+ 
+   Widget communityGithub() {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        labelText: 'Github Username',
+      ),
+    );
+  }
+  
+    Widget communityWeb() {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        labelText: 'Website',
+      ),
+    );
+  }
+   Widget communityDescription() {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        labelText: 'Description',
+      
+      ),
+      maxLines: 3,
+    );
+  }
 
-  Widget socialbottomSheet() {
+     Widget savebutton() {
+    return Center(
+      widthFactor: 150,
+      child: RawMaterialButton(
+          onPressed: () {},
+          fillColor: Colors.blue[800],
+          child: Text(
+            'Save',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          )),
+    );
+  }
+
+
+   Widget communitybottomSheet() {
     return Container(
       height: 100.0,
       width: MediaQuery.of(context).size.width,
@@ -221,4 +193,5 @@ class _SocialEditState extends State<SocialEdit> {
       ),
     );
   }
+
 }

@@ -1,8 +1,12 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:plutter/Backend/auth.dart';
+import 'package:plutter/Frontend/Home.dart';
+import 'package:provider/provider.dart';
 
 import 'CreateAccount.dart';
 import 'ViewPosts.dart';
@@ -15,14 +19,11 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-//Text field state
-  String email = '';
-  String password = '';
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  //final AuthServices _auth = AuthServices();
+
+
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -49,51 +50,11 @@ class _LoginState extends State<Login> {
               child: Form(
                 key: _formKey,
                 child: Column(children: <Widget>[
-                  Container(
-                      child: TextFormField(
-                    controller: _emailController,
-                   // ignore: missing_return
-                   validator: (input) {
-                        if (input.isEmpty) {
-                          return RegExp(
-                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(input) ? null : "Please Provide a valid email id";
-                        }
-                      },
-                    onChanged: (val) {
-                      setState(() => email = val);
-                    },
-                    onSaved: (input) => email = input,
-                    decoration: InputDecoration(
-                      labelText: 'Enter email',
-                      prefixIcon: Icon(Icons.email),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: 14.0),
-                    ),
-                  )),
+                  emailIdLogin(),
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                      child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    validator: (String value) {
-                      if (value.isEmpty || value.length < 6) {
-                        return 'Password must be >= 6 character';
-                      }
-                      return null;
-                    },
-                    onChanged: (val) {
-                      setState(() => password = val);
-                    },
-                    onSaved: (input) => password = input,
-                    decoration: InputDecoration(
-                      labelText: 'Enter Password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: 14.0),
-                    ),
-                  )),
+                  passwordLogin(),
                   SizedBox(
                     height: 50,
                   ),
@@ -114,30 +75,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 20,
                   ),
-                  RawMaterialButton(
-                      fillColor: Colors.blue[800],
-                      onPressed: () async {
-                        _formKey.currentState.validate();
-                        print(email);
-                        print(password);
-                        // Navigator.pushReplacement(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => PlutterHomePage()));
-                      },
-                      padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          //     fontFamily: "Satisfy",
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ))
+                  loginButton(),
                 ]),
               ),
             ),
@@ -177,21 +115,61 @@ class _LoginState extends State<Login> {
     );
   }
 
-
-  Future<void> login(){
-    
+  Widget emailIdLogin() {
+    return TextFormField(
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+     
+      decoration: InputDecoration(
+        labelText: 'Enter email',
+        prefixIcon: Icon(Icons.email),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+    );
   }
 
+  Widget passwordLogin() {
+    return TextFormField(
+      controller: _passwordController,
+      obscureText: true,
+     
+  
+      decoration: InputDecoration(
+        labelText: 'Enter Password',
+        prefixIcon: Icon(Icons.lock),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+    );
+  }
 
+  Widget loginButton() {
+    return RawMaterialButton(
+        fillColor: Colors.blue[800],
+        onPressed: () {
+          context.read<AuthenticationService>().login(
+            email:  _emailController.text.trim(),
+            password:  _passwordController.text.trim(),
 
-
+          );
+        },
+        padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            //     fontFamily: "Satisfy",
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ));
+  }
 }
 
-// Channel page.
-
-//Community page
-
-// Number authentication screen hai bhai log
 class Number extends StatefulWidget {
   @override
   _NumberState createState() => _NumberState();

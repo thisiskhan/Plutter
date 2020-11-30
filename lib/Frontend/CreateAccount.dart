@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:plutter/Frontend/Login.dart';
 
 import 'Createchannelpage.dart';
 
@@ -11,7 +14,7 @@ class _CreateAccountState extends State<CreateAccount> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 // final AuthServices _auth = AuthServices();
-
+  final auth = FirebaseAuth.instance;
 //Register State
   String username = '';
   String email = '';
@@ -54,92 +57,19 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: Form(
                   //   key: _formKey,
                   child: Column(children: <Widget>[
-                    Container(
-                        child: TextFormField(
-                      // ignore: missing_return
-                      controller: _username,
-                      validator: (value) {
-                        if (value.length < 2 || value.isEmpty) {
-                          return "Username is too short.";
-                        } else if (value.length > 12) {
-                          return "Username is too long.";
-                        } else {
-                          return null;
-                        }
-                      },
-
-                      decoration: InputDecoration(
-                        labelText: 'Select username',
-                        prefixIcon: Icon(Icons.account_circle),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                      ),
-                      //       controller: usernameTextEditingController,
-                    )),
+                    userName(),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                        child: TextFormField(
-                      // ignore: missing_return
-                      validator: (input) {
-                        if (input.isEmpty) {
-                          return RegExp(
-                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(input) ? null : "Please Provide a valid email id";
-                        }
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Enter email',
-                        prefixIcon: Icon(Icons.email),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                      ),
-                      //       controller: emailTextEditingController,
-                    )),
+                    emailIdCreate(),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                        child: TextFormField(
-                      obscureText: true,
-                      //       onSaved: (input) => _password = input,
-                      // ignore: missing_return
-                      validator: (input) {
-                        if (input.length < 8) {
-                          return ' Password must be at least 8 character';
-                        }
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Enter Password',
-                        prefixIcon: Icon(Icons.lock),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                      ),
-                      //       controller: passwordTextEditingController,
-                    )),
+                    passwordCreate(),
                     SizedBox(
                       height: 40,
                     ),
-                    RawMaterialButton(
-                        fillColor: Colors.blue[800],
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChannelPage()));
-                        },
-                        padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                        child: Text(
-                          'CREATE ACCOUNT',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ))
+                    createAccountBut(),
                   ]),
                 ),
               ),
@@ -147,7 +77,7 @@ class _CreateAccountState extends State<CreateAccount> {
               GestureDetector(
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChannelPage()));
+                      MaterialPageRoute(builder: (context) => Login()));
                 },
                 child: RichText(
                     text: TextSpan(children: [
@@ -173,6 +103,85 @@ class _CreateAccountState extends State<CreateAccount> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget createAccountBut() {
+    return RawMaterialButton(
+        fillColor: Colors.blue[800],
+        onPressed: () {
+          auth.createUserWithEmailAndPassword(email: email, password: password);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChannelPage()));
+        },
+        padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+        child: Text(
+          'CREATE ACCOUNT',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ));
+  }
+
+  Widget userName() {
+    return TextFormField(
+      // ignore: missing_return
+      controller: _username,
+      validator: (value) {
+        if (value.length < 2 || value.isEmpty) {
+          return "Username is too short.";
+        } else if (value.length > 12) {
+          return "Username is too long.";
+        } else {
+          return null;
+        }
+      },
+
+      decoration: InputDecoration(
+        labelText: 'Select username',
+        prefixIcon: Icon(Icons.account_circle),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+      //       controller: usernameTextEditingController,
+    );
+  }
+
+  Widget emailIdCreate() {
+    return TextFormField(
+      // ignore: missing_return
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        labelText: 'Enter email',
+        prefixIcon: Icon(Icons.email),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+      //       controller: emailTextEditingController,
+    );
+  }
+
+  Widget passwordCreate() {
+    return TextFormField(
+      obscureText: true,
+
+      validator: (input) {
+        if (input.length < 8) {
+          return ' Password must be at least 8 character';
+        }
+      },
+      decoration: InputDecoration(
+        labelText: 'Enter Password',
+        prefixIcon: Icon(Icons.lock),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+      //       controller: passwordTextEditingController,
     );
   }
 }

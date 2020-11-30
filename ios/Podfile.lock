@@ -220,7 +220,7 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.7)
   - camera (0.0.1):
     - Flutter
-  - cloud_firestore (0.14.3):
+  - cloud_firestore (0.14.3-1):
     - Firebase/CoreOnly (~> 6.33.0)
     - Firebase/Firestore (~> 6.33.0)
     - firebase_core
@@ -280,12 +280,12 @@ PODS:
     - Firebase/CoreOnly (~> 6.33.0)
     - firebase_core
     - Flutter
-  - firebase_auth (0.18.3):
+  - firebase_auth (0.18.3-1):
     - Firebase/Auth (~> 6.33.0)
     - Firebase/CoreOnly (~> 6.33.0)
     - firebase_core
     - Flutter
-  - firebase_core (0.5.2):
+  - firebase_core (0.5.2-1):
     - Firebase/CoreOnly (~> 6.33.0)
     - Flutter
   - firebase_storage (5.0.1):
@@ -397,8 +397,6 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - path_provider (0.0.1):
-    - Flutter
   - PromisesObjC (1.2.11)
   - SDWebImage (5.9.4):
     - SDWebImage/Core (= 5.9.4)
@@ -415,7 +413,6 @@ DEPENDENCIES:
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
-  - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 SPEC REPOS:
   trunk:
@@ -462,21 +459,19 @@ EXTERNAL SOURCES:
     :path: Flutter
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
-  path_provider:
-    :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
-  cloud_firestore: 19c6f947dd14be9d71695ea23eefde67cd8829c8
+  cloud_firestore: ff21f96f114720fae096d385b9273087191bd184
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
   firebase_analytics: 52ba26fcfb9cc90f76b36c4e5200cc0a7e9024eb
-  firebase_auth: 240419f6b00dea39c60a2a9c4379c16c4a4b02fb
-  firebase_core: 350ba329d1641211bc6183a3236893cafdacfea7
+  firebase_auth: cb33b01b51904969161403bbcb20036519f0c578
+  firebase_core: 7423d688a1c6f2f2d859d64ae26991be39989781
   firebase_storage: d5cf595245e1770ef7081b026f603771bf5dd547
   FirebaseAnalytics: 5dd088bd2e67bb9d13dbf792d1164ceaf3052193
   FirebaseAuth: c92d49ada7948d1a23466e3db17bc4c2039dddc3
@@ -495,7 +490,6 @@ SPEC CHECKSUMS:
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40

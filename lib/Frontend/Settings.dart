@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:plutter/Backend/auth.dart';
 import 'package:plutter/Frontend/Privacy.dart';
+import 'package:provider/provider.dart';
 
 import 'About..dart';
 import 'Accountsett.dart';
@@ -122,9 +124,10 @@ class _SettingState extends State<Setting> {
             ListTile(
               title: Text('Logout'),
               onTap: () {
-                //        authMethods.signOut();
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                context.read<AuthenticationService>().logOut();
+                // //        authMethods.signOut();
+                // Navigator.push(
+                //     context, MaterialPageRoute(builder: (context) => Login()));
               },
             ),
           ],

@@ -22,7 +22,6 @@ class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
   final auth = FirebaseAuth.instance;
 
   @override
@@ -119,7 +118,13 @@ class _LoginState extends State<Login> {
     return TextFormField(
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
-     
+      validator: (input) {
+        if (input.isEmpty) {
+          return "Enter a valid email";
+        } else {
+          return null;
+        }
+      },
       decoration: InputDecoration(
         labelText: 'Enter email',
         prefixIcon: Icon(Icons.email),
@@ -133,8 +138,13 @@ class _LoginState extends State<Login> {
     return TextFormField(
       controller: _passwordController,
       obscureText: true,
-     
-  
+      validator: (input) {
+        if (input.length < 8) {
+          return ' Password must be at least 8 character';
+        } else {
+          return null;
+        }
+      },
       decoration: InputDecoration(
         labelText: 'Enter Password',
         prefixIcon: Icon(Icons.lock),
@@ -148,11 +158,18 @@ class _LoginState extends State<Login> {
     return RawMaterialButton(
         fillColor: Colors.blue[800],
         onPressed: () {
-          context.read<AuthenticationService>().login(
-            email:  _emailController.text.trim(),
-            password:  _passwordController.text.trim(),
+          if (_formKey.currentState.validate()) {
+            return context.read<AuthenticationService>().login(
+                  email: _emailController.text.trim(),
+                  password: _passwordController.text.trim(),
+                );
+          }
 
-          );
+          // context.read<AuthenticationService>().login(
+          //   email:  _emailController.text.trim(),
+          //   password:  _passwordController.text.trim(),
+
+          // );
         },
         padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
         child: Text(

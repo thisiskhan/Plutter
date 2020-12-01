@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);
+
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
   Future<String> login({String email, String password}) async {
@@ -15,13 +16,40 @@ class AuthenticationService {
     }
   }
 
-  Future<String> createAcc({String email, String password}) async {
+// Creating account with email and password
+  Future createNewUser({String email, String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return "Account Created";
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // ignore: deprecated_member_use
+      FirebaseUser user = userCredential.user;
+      return user;
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      if (e.code == 'weak-password') {
+        return 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        return 'The account already exists for that email.';
+      }
+    } catch (e) {
+      print(e);
     }
+
+    // try {
+
+    //  // AuthResult result
+    //  await _firebaseAuth.createUserWithEmailAndPassword(
+    //       email: email, password: password);
+
+    //   return "Account Created";
+    // } on FirebaseAuthException catch (e) {
+    //   return e.message;
+    // }
+  }
+
+  Future<void> logOut() async {
+    await _firebaseAuth.signOut();
   }
 }

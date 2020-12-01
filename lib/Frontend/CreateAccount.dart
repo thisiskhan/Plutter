@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:plutter/Backend/auth.dart';
 import 'package:plutter/Frontend/Login.dart';
 
 import 'Createchannelpage.dart';
@@ -12,7 +13,8 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  final AuthenticationService _authenticationService =
+      AuthenticationService(FirebaseAuth.instance);
 // final AuthServices _auth = AuthServices();
   final auth = FirebaseAuth.instance;
 //Register State
@@ -109,10 +111,35 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget createAccountBut() {
     return RawMaterialButton(
         fillColor: Colors.blue[800],
-        onPressed: () {
-          auth.createUserWithEmailAndPassword(email: email, password: password);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChannelPage()));
+        onPressed: () async {
+          try {
+            // ignore: deprecated_member_use
+            FirebaseUser user =
+                (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              // ignore: deprecated_member_use
+              email: _email.text.trim(),
+              password: _password.text.trim(),
+              // ignore: deprecated_member_use
+            )) as FirebaseUser;
+
+            if (user != null) {
+              //  UserUpdateInfo info = UserUpdateInfo();
+            }
+          } catch (e) {
+            print(e);
+            _username.text = "";
+            _email.text = "";
+            _password.text = "";
+
+            // ignore: todo
+            // TODO: alertDialog with error
+          }
+
+          // if (_formKey.currentState.validate()) {
+          //   createUser();
+          // }
+          // Navigator.pushReplacement(
+          //     context, MaterialPageRoute(builder: (context) => ChannelPage()));
         },
         padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
         child: Text(
@@ -128,6 +155,20 @@ class _CreateAccountState extends State<CreateAccount> {
         ));
   }
 
+  void createUser() async {
+    dynamic result = await _authenticationService.createNewUser(
+      email: _email.text.trim(),
+      password: _password.text.trim(),
+    );
+    if (result == null) {
+      print("User Created");
+    } else {
+      _email.clear();
+      _password.clear();
+      _username.clear();
+    }
+  }
+
   Widget userName() {
     return TextFormField(
       // ignore: missing_return
@@ -141,6 +182,7 @@ class _CreateAccountState extends State<CreateAccount> {
           return null;
         }
       },
+      onSaved: (value) => _username.text.trim(),
 
       decoration: InputDecoration(
         labelText: 'Select username',
@@ -173,6 +215,8 @@ class _CreateAccountState extends State<CreateAccount> {
       validator: (input) {
         if (input.length < 8) {
           return ' Password must be at least 8 character';
+        } else {
+          return null;
         }
       },
       decoration: InputDecoration(

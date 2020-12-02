@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Frontend/Eshop.dart';
 import 'package:plutter/Frontend/Explore.dart';
+import 'package:plutter/Widgets/progress.dart';
 import 'Activity.dart';
 import 'Camera.dart';
 import 'Chat.dart';
@@ -158,7 +159,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: SingleChildScrollView(
-        child: _post(),
+        child: linearProgress(),
       ),
     );
   }

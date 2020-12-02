@@ -8,6 +8,7 @@ import 'package:plutter/Frontend/Login.dart';
 import 'Createchannelpage.dart';
 
 class CreateAccount extends StatefulWidget {
+  CreateAccount({Key key}) : super(key: key);
   @override
   _CreateAccountState createState() => _CreateAccountState();
 }
@@ -25,10 +26,20 @@ class _CreateAccountState extends State<CreateAccount> {
 
   bool isLoading = false;
 
-  final TextEditingController _username = TextEditingController();
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-  final TextEditingController _conpassword = TextEditingController();
+  TextEditingController _username;
+  TextEditingController _email;
+  TextEditingController _password;
+  TextEditingController _conpassword;
+
+  @override
+  initState() {
+    _email = new TextEditingController();
+    _username = new TextEditingController();
+    _password = new TextEditingController();
+    _conpassword = new TextEditingController();
+
+    super.initState();
+  }
 
   String emailValidator(String value) {
     Pattern pattern =
@@ -154,7 +165,51 @@ class _CreateAccountState extends State<CreateAccount> {
         onPressed: () async {
           if (_formKey.currentState.validate()) {
             if (_password.text == _conpassword.text) {
-              createNewUser();
+              return FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(
+                      email: email, password: password)
+                  // ignore: deprecated_member_use
+                  .then((authResult) => Firestore.instance
+                      .collection("User")
+
+                      // ignore: deprecated_member_use
+                      .document(authResult.user.uid)
+                      // ignore: deprecated_member_use
+                      .setData({
+                        "uid": authResult.user.uid,
+                        "username": _username.text,
+                        "email": _email.text
+                      })
+                      .then((result) => {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChannelPage()),
+                                (_) => false),
+                            _username.clear(),
+                            _email.clear(),
+                            _password.clear(),
+                            _conpassword.clear(),
+                          })
+                      .catchError((err) => print(err)))
+                  .catchError((err) => print(err));
+            } else {
+              return showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Error"),
+                      content: Text("The passwords do not match"),
+                      actions: [
+                        FlatButton(
+                          child: Text("close"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  });
             }
           }
         },
@@ -252,23 +307,6 @@ class _CreateAccountState extends State<CreateAccount> {
                         _password.clear(),
                         _conpassword.clear(),
                       }));
-    } on FirebaseAuthException catch (e) {
-      return showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(e.message),
-              content: Text("The passwords do not match"),
-              actions: [
-                FlatButton(
-                  child: Text("close"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-    }
+    } on FirebaseAuthException catch (e) {}
   }
 }

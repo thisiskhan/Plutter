@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:plutter/Backend/User.dart' as Puser; 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);
+
+  // ignore: deprecated_member_use
+  // User _userFromFirebaseUser(FirebaseUser user) {
+  //   return user != null ? Puser(uid: user.uid) : null;
+  // }
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
@@ -16,42 +21,22 @@ class AuthenticationService {
     }
   }
 
-
-// Creating account with email and password
-  Future createNewUser({String email, String password}) async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      // ignore: deprecated_member_use
-      FirebaseUser user = userCredential.user;
-      return user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return 'The password provided is too weak.';
-      } else if (e.code == 'email-already-in-use') {
-        return 'The account already exists for that email.';
-      }
-    } catch (e) {
-      print(e);
-    }
-
-    // try {
-
-    //  // AuthResult result
-    //  await _firebaseAuth.createUserWithEmailAndPassword(
-    //       email: email, password: password);
-
-    //   return "Account Created";
-    // } on FirebaseAuthException catch (e) {
-    //   return e.message;
-    // }
-  }
-
-  Future<void> logOut() async {
+  Future logOut() async {
     await _firebaseAuth.signOut();
   }
+
+  Future resetPassword(String email) async {
+    try {
+      return await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  // Future phoneNumberLogin(int )async{
+  //   try {
+  //     await _firebaseAuth.signInWithPhoneNumber()
+  //   } catch (e) {
+  //   }
+  // }
 }

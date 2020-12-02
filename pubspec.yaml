@@ -13,17 +13,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-
+  
   cupertino_icons: ^1.0.0
+  package_info: ^0.4.3+2
   image_picker:
   file_picker:
   material_design_icons_flutter:
-  camera: ^0.5.8+11
+  device_info: ^1.0.0
   provider: ^4.3.2+2
   firebase_core: ^0.5.2+1
-  cloud_firestore: ^0.14.3
+  cloud_firestore: ^0.14.3+1
   firebase_storage: ^5.0.1
   firebase_analytics: "^6.2.0"
   firebase_auth: ^0.18.3+1

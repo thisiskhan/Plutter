@@ -16,6 +16,7 @@ class AuthenticationService {
     }
   }
 
+
 // Creating account with email and password
   Future createNewUser({String email, String password}) async {
     try {
@@ -24,6 +25,7 @@ class AuthenticationService {
         email: email,
         password: password,
       );
+
       // ignore: deprecated_member_use
       FirebaseUser user = userCredential.user;
       return user;

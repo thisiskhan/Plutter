@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: SplashScreen(),
         debugShowCheckedModeBanner: false,
-        // routes: {'Login': (context) => Login()},
+        routes: {'Login': (context) => Login()},
       ),
     );
   }
@@ -41,31 +41,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // void startTimer() {
-  //   Timer(Duration(seconds: 2), () {
-  //     Navigator.of(context).pushReplacementNamed('Login');
-  //   });
-  // }
+  void startTimer() {
+    Timer(Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacementNamed('Login');
+    });
+  }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   startTimer();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final firebaseuser = context.watch<User>();
+    // final firebaseuser = context.watch<User>();
 
-    if (firebaseuser != null) {
-      return PlutterHomePage();
-    }
-    return Login();
+    // if (firebaseuser != null) {
+    //   return PlutterHomePage();
+    // }
+    // return Login();
 
-    // return Scaffold(
-    //     backgroundColor: Colors.white,
-    //     body: Container(
-    //       child: Center(child: Image.asset("assets/images/plutterSplash.jpeg")),
-    //     ));
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+          child: Center(child: Image.asset("assets/images/plutterSplash.jpeg")),
+        ));
   }
 }

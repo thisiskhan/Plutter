@@ -26,7 +26,92 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+ final firebaseuser = context.watch<User>();
+
+    if (firebaseuser != null) {
+      return PlutterHomePage();
+    }
+    return buildLoginScreen();
+
+    
+  }
+
+  Widget emailIdLogin() {
+    return TextFormField(
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      validator: (input) {
+        if (input.isEmpty) {
+          return "Enter a valid email";
+        } else {
+          return null;
+        }
+      },
+      decoration: InputDecoration(
+        labelText: 'Enter email',
+        prefixIcon: Icon(Icons.email),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+    );
+  }
+
+  Widget passwordLogin() {
+    return TextFormField(
+      controller: _passwordController,
+      obscureText: true,
+      validator: (input) {
+        if (input.length < 8) {
+          return ' Password must be at least 8 character';
+        } else {
+          return null;
+        }
+      },
+      decoration: InputDecoration(
+        labelText: 'Enter Password',
+        prefixIcon: Icon(Icons.lock),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14.0),
+      ),
+    );
+  }
+
+  Widget loginButton() {
+    return RawMaterialButton(
+        fillColor: Colors.blue[800],
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            return context.read<AuthenticationService>().login(
+                  email: _emailController.text.trim(),
+                  password: _passwordController.text.trim(),
+                );
+          }
+
+          // context.read<AuthenticationService>().login(
+          //   email:  _emailController.text.trim(),
+          //   password:  _passwordController.text.trim(),
+
+          // );
+        },
+        padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            //     fontFamily: "Satisfy",
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ));
+  }
+
+
+Widget buildLoginScreen(){
+  return Scaffold(
       body: SingleChildScrollView(
         child: Container(
             child: Column(
@@ -113,79 +198,9 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
-  Widget emailIdLogin() {
-    return TextFormField(
-      controller: _emailController,
-      keyboardType: TextInputType.emailAddress,
-      validator: (input) {
-        if (input.isEmpty) {
-          return "Enter a valid email";
-        } else {
-          return null;
-        }
-      },
-      decoration: InputDecoration(
-        labelText: 'Enter email',
-        prefixIcon: Icon(Icons.email),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.only(top: 14.0),
-      ),
-    );
-  }
-
-  Widget passwordLogin() {
-    return TextFormField(
-      controller: _passwordController,
-      obscureText: true,
-      validator: (input) {
-        if (input.length < 8) {
-          return ' Password must be at least 8 character';
-        } else {
-          return null;
-        }
-      },
-      decoration: InputDecoration(
-        labelText: 'Enter Password',
-        prefixIcon: Icon(Icons.lock),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.only(top: 14.0),
-      ),
-    );
-  }
-
-  Widget loginButton() {
-    return RawMaterialButton(
-        fillColor: Colors.blue[800],
-        onPressed: () {
-          if (_formKey.currentState.validate()) {
-            return context.read<AuthenticationService>().login(
-                  email: _emailController.text.trim(),
-                  password: _passwordController.text.trim(),
-                );
-          }
-
-          // context.read<AuthenticationService>().login(
-          //   email:  _emailController.text.trim(),
-          //   password:  _passwordController.text.trim(),
-
-          // );
-        },
-        padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-            //     fontFamily: "Satisfy",
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ));
-  }
 }
+
+
 
 class Number extends StatefulWidget {
   @override

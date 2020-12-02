@@ -1,13 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:plutter/Backend/User.dart' as Puser; 
+import 'package:firebase_core/firebase_core.dart';
+import 'User.dart';
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);
 
-  // ignore: deprecated_member_use
-  // User _userFromFirebaseUser(FirebaseUser user) {
-  //   return user != null ? Puser(uid: user.uid) : null;
-  // }
+
+
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
@@ -21,6 +21,8 @@ class AuthenticationService {
     }
   }
 
+
+
   Future logOut() async {
     await _firebaseAuth.signOut();
   }
@@ -33,10 +35,5 @@ class AuthenticationService {
     }
   }
 
-  // Future phoneNumberLogin(int )async{
-  //   try {
-  //     await _firebaseAuth.signInWithPhoneNumber()
-  //   } catch (e) {
-  //   }
-  // }
+
 }

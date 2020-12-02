@@ -4,11 +4,16 @@ import 'package:plutter/Frontend/Login.dart';
 import 'CreateCommunitypage.dart';
 
 class ChannelPage extends StatefulWidget {
+  ChannelPage({Key key, this.email}) : super(key: key);
+  final String email;
+
   @override
   _ChannelPageState createState() => _ChannelPageState();
 }
 
 class _ChannelPageState extends State<ChannelPage> {
+  var email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +87,7 @@ class _ChannelPageState extends State<ChannelPage> {
             ),
             Center(
               child: Text(
-                'Username',
+                '$email',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

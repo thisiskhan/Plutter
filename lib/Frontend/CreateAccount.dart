@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:plutter/Backend/auth.dart';
+import 'package:plutter/Frontend/Createchannelpage.dart';
 import 'package:plutter/Frontend/Login.dart';
 
-import 'Createchannelpage.dart';
-
 class CreateAccount extends StatefulWidget {
-  CreateAccount({Key key}) : super(key: key);
   @override
   _CreateAccountState createState() => _CreateAccountState();
 }
@@ -20,23 +17,25 @@ class _CreateAccountState extends State<CreateAccount> {
 
   final auth = FirebaseAuth.instance;
 
-  String username = '';
-  String email = '';
-  String password = '';
+  String username ;
+  String email ;
+  String password;
 
   bool isLoading = false;
 
-  TextEditingController _username;
-  TextEditingController _email;
-  TextEditingController _password;
-  TextEditingController _conpassword;
+  TextEditingController _usernamecon;
+  TextEditingController _emailcon;
+  TextEditingController _passwordcon;
+  TextEditingController _conpasswordcon;
+
+  get usernamesRef => null;
 
   @override
   initState() {
-    _email = new TextEditingController();
-    _username = new TextEditingController();
-    _password = new TextEditingController();
-    _conpassword = new TextEditingController();
+    _emailcon = new TextEditingController();
+    _usernamecon = new TextEditingController();
+    _passwordcon = new TextEditingController();
+    _conpasswordcon = new TextEditingController();
 
     super.initState();
   }
@@ -45,7 +44,7 @@ class _CreateAccountState extends State<CreateAccount> {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
+    if (value.isEmpty) {
       return 'Email format is invalid';
     } else {
       return null;
@@ -63,12 +62,6 @@ class _CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: isLoading? Container(
-      //         child: Center(
-      //           child: CircularProgressIndicator(),
-      //         ),
-      //       )
-      //     :
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -90,7 +83,7 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(height: 30.0),
               Container(
                 child: Form(
-                  //   key: _formKey,
+                    key: _formKey,
                   child: Column(children: <Widget>[
                     userName(),
                     SizedBox(
@@ -155,7 +148,7 @@ class _CreateAccountState extends State<CreateAccount> {
         border: InputBorder.none,
         contentPadding: EdgeInsets.only(top: 14.0),
       ),
-      controller: _conpassword,
+      controller: _conpasswordcon,
     );
   }
 
@@ -164,52 +157,14 @@ class _CreateAccountState extends State<CreateAccount> {
         fillColor: Colors.blue[800],
         onPressed: () async {
           if (_formKey.currentState.validate()) {
-            if (_password.text == _conpassword.text) {
-              return FirebaseAuth.instance
-                  .createUserWithEmailAndPassword(
-                      email: email, password: password)
-                  // ignore: deprecated_member_use
-                  .then((authResult) => Firestore.instance
-                      .collection("User")
+            if (_passwordcon.text == _conpasswordcon.text) {
+              return createNewUser(
+                email: _emailcon.text +
+                  "'s Task",
+                  password:  _passwordcon.text
 
-                      // ignore: deprecated_member_use
-                      .document(authResult.user.uid)
-                      // ignore: deprecated_member_use
-                      .setData({
-                        "uid": authResult.user.uid,
-                        "username": _username.text,
-                        "email": _email.text
-                      })
-                      .then((result) => {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChannelPage()),
-                                (_) => false),
-                            _username.clear(),
-                            _email.clear(),
-                            _password.clear(),
-                            _conpassword.clear(),
-                          })
-                      .catchError((err) => print(err)))
-                  .catchError((err) => print(err));
-            } else {
-              return showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("Error"),
-                      content: Text("The passwords do not match"),
-                      actions: [
-                        FlatButton(
-                          child: Text("close"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        )
-                      ],
-                    );
-                  });
+                
+              );
             }
           }
         },
@@ -227,10 +182,39 @@ class _CreateAccountState extends State<CreateAccount> {
         ));
   }
 
+  Future<void> createNewUser({String email, String password}) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email??'khan123@gmail.com', password: password)
+        .then((currentUser) =>
+            // ignore: deprecated_member_use
+            Firestore.instance
+                .collection("users")
+                // ignore: deprecated_member_use
+                .document(currentUser.user.uid)
+                // ignore: deprecated_member_use
+                .setData({
+              "uid": currentUser.user.uid,
+              "email": _emailcon.text,
+              "username": _usernamecon.text,
+              "password": _passwordcon.text
+            })
+            .then((result) =>{
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (context) => ChannelPage()
+              ), (_) => false),
+              _usernamecon.clear(),
+              _passwordcon.clear(),
+              _emailcon.clear(),
+              _conpasswordcon.clear(),
+            } )
+            );
+  }
+
   Widget userName() {
     return TextFormField(
       // ignore: missing_return
-      controller: _username,
+      controller: _usernamecon,
       validator: (value) {
         if (value.length < 2 || value.isEmpty) {
           return "Username is too short.";
@@ -240,7 +224,7 @@ class _CreateAccountState extends State<CreateAccount> {
           return null;
         }
       },
-      onSaved: (value) => _username.text.trim(),
+      onSaved: (value) => _usernamecon.text.trim(),
 
       decoration: InputDecoration(
         labelText: 'Select username',
@@ -248,8 +232,16 @@ class _CreateAccountState extends State<CreateAccount> {
         border: InputBorder.none,
         contentPadding: EdgeInsets.only(top: 14.0),
       ),
-      //       controller: usernameTextEditingController,
     );
+  }
+
+  Future<bool> usernameCheck() async {
+    final snapShot = await usernamesRef.document(_usernamecon).get();
+    if (snapShot == null || !snapShot.exists) {
+      return true; //username is unique.
+    } else {
+      return false; //username exists.
+    }
   }
 
   Widget emailIdCreate() {
@@ -263,7 +255,7 @@ class _CreateAccountState extends State<CreateAccount> {
         border: InputBorder.none,
         contentPadding: EdgeInsets.only(top: 14.0),
       ),
-      //       controller: emailTextEditingController,
+      controller: _emailcon,
     );
   }
 
@@ -277,36 +269,7 @@ class _CreateAccountState extends State<CreateAccount> {
         border: InputBorder.none,
         contentPadding: EdgeInsets.only(top: 14.0),
       ),
-      controller: _password,
+      controller: _passwordcon,
     );
-  }
-
-  Future<String> createNewUser({String email, String password}) async {
-    try {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          // ignore: deprecated_member_use
-          .then((authResult) => Firestore.instance
-                  .collection("User")
-
-                  // ignore: deprecated_member_use
-                  .document(authResult.user.uid)
-                  // ignore: deprecated_member_use
-                  .setData({
-                "uid": authResult.user.uid,
-                "username": _username.text,
-                "email": _email.text
-              }).then((result) => {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChannelPage()),
-                            (_) => false),
-                        _username.clear(),
-                        _email.clear(),
-                        _password.clear(),
-                        _conpassword.clear(),
-                      }));
-    } on FirebaseAuthException catch (e) {}
   }
 }

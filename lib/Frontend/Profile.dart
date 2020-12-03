@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:plutter/Frontend/Soc_Cha_Com.dart';
+import 'package:plutter/Frontend/ViewPost.dart';
 import 'Camera.dart';
 import 'CreateAlive.dart';
 import 'CreateFame.dart';
 import 'CreatePluts.dart';
 import 'EditProfile.dart';
 import 'Settings.dart';
-import 'ViewPosts.dart';
-import 'ViewProfile.dart';
+import 'Soc_Cha_Com.dart';
+
 
 class Profile extends StatefulWidget {
   @override
@@ -29,7 +31,7 @@ class _ProfileState extends State<Profile> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ViewProfile()));
+                    MaterialPageRoute(builder: (context) => SocailChannelCommunityProfile()));
               },
               child: Icon(
                 Icons.remove_red_eye_outlined,

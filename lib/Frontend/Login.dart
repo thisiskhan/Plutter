@@ -5,9 +5,10 @@ import 'package:flutter/rendering.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Backend/auth.dart';
 import 'package:plutter/Frontend/Home.dart';
+import 'package:plutter/Frontend/ViewPost.dart';
 import 'package:provider/provider.dart';
 import 'CreateAccount.dart';
-import 'ViewPosts.dart';
+import 'Soc_Cha_Com.dart';
 
 // Login Screen hai ye
 class Login extends StatefulWidget {

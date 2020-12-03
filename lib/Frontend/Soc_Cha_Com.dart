@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Frontend/ChatRoom.dart';
 import 'package:plutter/Frontend/Eshop.dart';
-import 'ViewPosts.dart';
+import 'ViewPost.dart';
 
 
-class ViewProfile extends StatefulWidget {
+class SocailChannelCommunityProfile extends StatefulWidget {
   @override
-  _ViewProfileState createState() => _ViewProfileState();
+  _SocailChannelCommunityProfileState createState() => _SocailChannelCommunityProfileState();
 }
 
-class _ViewProfileState extends State<ViewProfile>
+class _SocailChannelCommunityProfileState extends State<SocailChannelCommunityProfile>
     with SingleTickerProviderStateMixin {
   TabController controller;
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     controller = new TabController(length: 3, vsync: this);
     super.initState();

@@ -155,18 +155,9 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget createAccountBut() {
     return RawMaterialButton(
         fillColor: Colors.blue[800],
-        onPressed: () async {
-          if (_formKey.currentState.validate()) {
-            if (_passwordcon.text == _conpasswordcon.text) {
-              return createNewUser(
-                email: _emailcon.text +
-                  "'s Task",
-                  password:  _passwordcon.text
-
-                
-              );
-            }
-          }
+        onPressed: ()  {
+       Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ChannelPage()));
         },
         padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
         child: Text(

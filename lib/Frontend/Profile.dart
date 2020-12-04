@@ -14,7 +14,7 @@ import 'CreateFame.dart';
 import 'CreatePluts.dart';
 import 'EditProfile.dart';
 import 'Settings.dart';
-import 'Soc_Cha_Com.dart';
+
 
 
 class Profile extends StatefulWidget {
@@ -37,7 +37,7 @@ class _ProfileState extends State<Profile> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChannelProfile()));
+                    MaterialPageRoute(builder: (context) => SocailChannelCommunityProfile()));
               },
               child: Icon(
                 Icons.remove_red_eye_outlined,

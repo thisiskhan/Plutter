@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: SingleChildScrollView(
-        child: linearProgress(),
+        child: circularProgress(),
       ),
     );
   }

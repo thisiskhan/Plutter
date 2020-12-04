@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:plutter/Frontend/Ch_Com_Profile.dart';
+import 'package:plutter/Frontend/Channel_Profile.dart';
+import 'package:plutter/Frontend/Community_Profile.dart';
 import 'package:plutter/Frontend/Soc_Cha_Com.dart';
+import 'package:plutter/Frontend/Socail_Commu_Profile.dart';
+import 'package:plutter/Frontend/Social_Profile.dart';
 import 'package:plutter/Frontend/ViewPost.dart';
+import 'package:plutter/Frontend/social_Cha_profile.dart';
 import 'Camera.dart';
 import 'CreateAlive.dart';
 import 'CreateFame.dart';
@@ -31,7 +37,7 @@ class _ProfileState extends State<Profile> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SocailChannelCommunityProfile()));
+                    MaterialPageRoute(builder: (context) => ChannelProfile()));
               },
               child: Icon(
                 Icons.remove_red_eye_outlined,

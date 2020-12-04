@@ -78,7 +78,8 @@ class _SocailChannelCommunityProfileState extends State<SocailChannelCommunityPr
                       Text('Community', style: TextStyle(color: Colors.black)),
                 ),
               ),
-            ])),
+            ])
+            ),
         body: TabBarView(
           controller: controller,
           children: [

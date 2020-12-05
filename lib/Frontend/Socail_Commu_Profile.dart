@@ -69,7 +69,8 @@ class _SocialCommunityProfileState extends State<SocialCommunityProfile>
                       Text('Community', style: TextStyle(color: Colors.black)),
                 ),
               ),
-            ])),
+            ])
+            ),
         body: TabBarView(
           controller: controller,
           children: [

@@ -37,7 +37,7 @@ class _ProfileState extends State<Profile> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SocailChannelCommunityProfile()));
+                    MaterialPageRoute(builder: (context) => ChannelCommunityProfiel()));
               },
               child: Icon(
                 Icons.remove_red_eye_outlined,

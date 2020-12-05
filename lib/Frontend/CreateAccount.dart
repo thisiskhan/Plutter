@@ -11,14 +11,46 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  bool socialPage = false;
+  bool channelPage = false;
+  bool communityPage = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthenticationService _authenticationService =
       AuthenticationService(FirebaseAuth.instance);
 
   final auth = FirebaseAuth.instance;
 
-  String username ;
-  String email ;
+  void _onSocialPage(bool value) {
+    setState(() {
+      socialPage = value;
+      if (socialPage) {
+      } else {}
+    });
+  }
+
+  void _onChannelPage(bool value) {
+    setState(() {
+      channelPage = value;
+      if(channelPage){
+
+      }else{
+
+      }
+    });
+  }
+    void _onCommunityPage(bool value) {
+    setState(() {
+      communityPage = value;
+      if(communityPage){
+
+      }else{
+        
+      }
+    });
+  }
+
+  String username;
+  String email;
   String password;
 
   bool isLoading = false;
@@ -83,7 +115,7 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(height: 30.0),
               Container(
                 child: Form(
-                    key: _formKey,
+                  key: _formKey,
                   child: Column(children: <Widget>[
                     userName(),
                     SizedBox(
@@ -155,9 +187,87 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget createAccountBut() {
     return RawMaterialButton(
         fillColor: Colors.blue[800],
-        onPressed: ()  {
-       Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => ChannelPage()));
+        onPressed: () {
+          return showDialog(
+              context: context,
+              builder: (context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  elevation: 16,
+                  child: Container(
+                    height: 400.0,
+                    width: 360.0,
+                    child: ListView(
+                      children: <Widget>[
+                        SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            "Profile options",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Divider(),
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text("S"),
+                          ),
+                          title: Text("Socila Page"),
+                          trailing: Checkbox(
+                              value: socialPage,
+                              activeColor: Colors.green,
+                              onChanged: _onSocialPage),
+                        ),
+                        Divider(),
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text("Ch"),
+                          ),
+                          title: Text("Channel Page"),
+                          trailing: Checkbox(
+                              value: channelPage,
+                              activeColor: Colors.green,
+                              onChanged: _onChannelPage,),
+                        ),
+                        Divider(),
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text("Cu"),
+                          ),
+                          title: Text("Community Page"),
+                          trailing: Checkbox(
+                            value: communityPage,
+                            activeColor: Colors.green,
+                            onChanged: _onCommunityPage,
+                          ),
+                        ),
+                        Divider(
+                          height: 10,
+                        ),
+                        Center(
+                            child: RaisedButton(
+                                color: Colors.blue[800],
+                                onPressed: () {},
+                                child: Text(
+                                  'Continue',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ))),
+                      ],
+                    ),
+                  ),
+                );
+              });
         },
         padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
         child: Text(
@@ -176,7 +286,8 @@ class _CreateAccountState extends State<CreateAccount> {
   Future<void> createNewUser({String email, String password}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email??'khan123@gmail.com', password: password)
+        .createUserWithEmailAndPassword(
+            email: email ?? 'khan123@gmail.com', password: password)
         .then((currentUser) =>
             // ignore: deprecated_member_use
             Firestore.instance
@@ -189,17 +300,17 @@ class _CreateAccountState extends State<CreateAccount> {
               "email": _emailcon.text,
               "username": _usernamecon.text,
               "password": _passwordcon.text
-            })
-            .then((result) =>{
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-                builder: (context) => ChannelPage()
-              ), (_) => false),
-              _usernamecon.clear(),
-              _passwordcon.clear(),
-              _emailcon.clear(),
-              _conpasswordcon.clear(),
-            } )
-            );
+            }).then((result) => {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChannelPage()),
+                          (_) => false),
+                      _usernamecon.clear(),
+                      _passwordcon.clear(),
+                      _emailcon.clear(),
+                      _conpasswordcon.clear(),
+                    }));
   }
 
   Widget userName() {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Frontend/Eshop.dart';
 import 'package:plutter/Frontend/ViewPost.dart';
-
 import 'ChatRoom.dart';
 
 class SocialProfile extends StatefulWidget {

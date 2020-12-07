@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:plutter/Backend/auth.dart';
 import 'package:plutter/Frontend/Createchannelpage.dart';
 import 'package:plutter/Frontend/Login.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -11,43 +12,14 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  bool socialPage = false;
-  bool channelPage = false;
-  bool communityPage = false;
+  bool socialPageCheck = false;
+  bool channelPageCheck = false;
+  bool communityPageCheck = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthenticationService _authenticationService =
       AuthenticationService(FirebaseAuth.instance);
 
   final auth = FirebaseAuth.instance;
-
-  void _onSocialPage(bool value) {
-    setState(() {
-      socialPage = value;
-      if (socialPage) {
-      } else {}
-    });
-  }
-
-  void _onChannelPage(bool value) {
-    setState(() {
-      channelPage = value;
-      if(channelPage){
-
-      }else{
-
-      }
-    });
-  }
-    void _onCommunityPage(bool value) {
-    setState(() {
-      communityPage = value;
-      if(communityPage){
-
-      }else{
-        
-      }
-    });
-  }
 
   String username;
   String email;
@@ -218,9 +190,14 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                           title: Text("Socila Page"),
                           trailing: Checkbox(
-                              value: socialPage,
-                              activeColor: Colors.green,
-                              onChanged: _onSocialPage),
+                            value: socialPageCheck,
+                            activeColor: Colors.blue[800],
+                            onChanged: (bool value) {
+                              setState(() {
+                                socialPageCheck = value;
+                              });
+                            },
+                          ),
                         ),
                         Divider(),
                         ListTile(
@@ -229,9 +206,14 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                           title: Text("Channel Page"),
                           trailing: Checkbox(
-                              value: channelPage,
-                              activeColor: Colors.green,
-                              onChanged: _onChannelPage,),
+                            value: channelPageCheck,
+                            activeColor: Colors.blue[800],
+                            onChanged: (bool value) {
+                              setState(() {
+                                channelPageCheck = value;
+                              });
+                            },
+                          ),
                         ),
                         Divider(),
                         ListTile(
@@ -240,9 +222,13 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                           title: Text("Community Page"),
                           trailing: Checkbox(
-                            value: communityPage,
-                            activeColor: Colors.green,
-                            onChanged: _onCommunityPage,
+                            value: communityPageCheck,
+                            activeColor: Colors.blue[800],
+                            onChanged: (bool value) {
+                              setState(() {
+                                communityPageCheck = value;
+                              });
+                            },
                           ),
                         ),
                         Divider(

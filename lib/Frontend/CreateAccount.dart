@@ -156,6 +156,8 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
+  
+
   Widget createAccountBut() {
     return RawMaterialButton(
         fillColor: Colors.blue[800],
@@ -201,6 +203,11 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                         Divider(),
                         ListTile(
+                          onTap:  (){
+                            setState(() {
+                              this.channelPageCheck = !channelPageCheck;
+                            });
+                          },
                           leading: CircleAvatar(
                             child: Text("Ch"),
                           ),
@@ -268,6 +275,10 @@ class _CreateAccountState extends State<CreateAccount> {
           borderRadius: BorderRadius.circular(5.0),
         ));
   }
+
+  // Widget profileCheckBox() => Checkbox(
+  //   value: ,
+  // )
 
   Future<void> createNewUser({String email, String password}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;

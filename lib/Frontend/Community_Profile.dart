@@ -11,40 +11,39 @@ class _CommunityProfileState extends State<CommunityProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Center(
-        child: Text("Username",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Center(
+          child: Text("Username",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+        actions: <Widget>[
+          GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  right: 15,
+                ),
+                child: Icon(Icons.notifications_outlined, color: Colors.black),
+              )),
+          GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  right: 15,
+                ),
+                child: Icon(Icons.info_outline, color: Colors.black),
+              )),
+        ],
       ),
-      actions: <Widget>[
-        GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 15,
-              ),
-              child: Icon(Icons.notifications_outlined, color: Colors.black),
-            )),
-        GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 15,
-              ),
-              child: Icon(Icons.info_outline, color: Colors.black),
-            )),
-      ],
-    ),
-    body: communityPage(),
+      body: communityPage(),
     );
   }
-
 
   Widget communityPage() {
     return SingleChildScrollView(
@@ -204,7 +203,7 @@ class _CommunityProfileState extends State<CommunityProfile> {
     ));
   }
 
-     buildStatColoumn(String value, String title) {
+  buildStatColoumn(String value, String title) {
     return Column(
       children: [
         Text(

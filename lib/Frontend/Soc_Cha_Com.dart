@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:plutter/Frontend/ChatRoom.dart';
 import 'package:plutter/Frontend/Eshop.dart';
+import 'package:plutter/Frontend/viewplubs.dart';
 import 'ViewPost.dart';
 
 
@@ -417,7 +418,9 @@ class _SocailChannelCommunityProfileState extends State<SocailChannelCommunityPr
               RaisedButton(
                   elevation: 0,
                   color: Colors.blue[800],
-                  onPressed: () {},
+                  onPressed: () {
+               
+                  },
                   child: Text(
                     "Subscribe",
                     style: TextStyle(
@@ -431,7 +434,10 @@ class _SocailChannelCommunityProfileState extends State<SocailChannelCommunityPr
               RaisedButton(
                   elevation: 0,
                   color: Colors.blue[800],
-                  onPressed: () {},
+                  onPressed: () {
+                                 Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => ViewPlubs()));
+                  },
                   child: Text(
                     "View Plubs",
                     style: TextStyle(

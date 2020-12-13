@@ -32,6 +32,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  dio:
+  fluttertoast:   
 
 
 flutter:

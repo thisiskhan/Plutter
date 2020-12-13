@@ -8,6 +8,7 @@ import 'package:plutter/Frontend/Home.dart';
 import 'package:plutter/Frontend/ViewPost.dart';
 import 'package:provider/provider.dart';
 import 'CreateAccount.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Soc_Cha_Com.dart';
 
 // Login Screen hai ye
@@ -23,21 +24,23 @@ class _LoginState extends State<Login> {
 
   final auth = FirebaseAuth.instance;
 
+  var email, password, token;
+
   @override
   Widget build(BuildContext context) {
-
- final firebaseuser = context.watch<User>();
+    final firebaseuser = context.watch<User>();
 
     if (firebaseuser != null) {
       return PlutterHomePage();
     }
     return buildLoginScreen();
-
-    
   }
 
   Widget emailIdLogin() {
     return TextFormField(
+      onChanged: (val) {
+        email = val;
+      },
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       validator: (input) {
@@ -58,6 +61,9 @@ class _LoginState extends State<Login> {
 
   Widget passwordLogin() {
     return TextFormField(
+      onChanged: (val) {
+        val = password;
+      },
       controller: _passwordController,
       obscureText: true,
       validator: (input) {
@@ -85,13 +91,21 @@ class _LoginState extends State<Login> {
                   email: _emailController.text.trim(),
                   password: _passwordController.text.trim(),
                 );
+
+            // AuthService().loginUser(email, password).then((val) {
+            //   if (val.data['succes']) {
+            //     token = val.data['token'];
+            //     Fluttertoast.showToast(
+            //       msg: 'User Authenticatd',
+            //       toastLength: Toast.LENGTH_SHORT,
+            //       gravity: ToastGravity.BOTTOM,
+            //       backgroundColor: Colors.green,
+            //       textColor: Colors.white,
+            //       fontSize: 16.0,
+            //     );
+            //   }
+            // });
           }
-
-          // context.read<AuthenticationService>().login(
-          //   email:  _emailController.text.trim(),
-          //   password:  _passwordController.text.trim(),
-
-          // );
         },
         padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
         child: Text(
@@ -108,9 +122,8 @@ class _LoginState extends State<Login> {
         ));
   }
 
-
-Widget buildLoginScreen(){
-  return Scaffold(
+  Widget buildLoginScreen() {
+    return Scaffold(
       body: SingleChildScrollView(
         child: Container(
             child: Column(
@@ -198,8 +211,6 @@ Widget buildLoginScreen(){
     );
   }
 }
-
-
 
 class Number extends StatefulWidget {
   @override

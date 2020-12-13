@@ -1,13 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'User.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 class AuthenticationService {
+  Dio dio = new Dio();
   final FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);
-
-
-
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
@@ -20,8 +19,6 @@ class AuthenticationService {
       return e.message;
     }
   }
-
-
 
   Future logOut() async {
     await _firebaseAuth.signOut();
@@ -36,4 +33,27 @@ class AuthenticationService {
   }
 
 
+}
+
+class AuthService{ 
+   Dio dio = new Dio();
+   loginUser(emial, password) async {
+    try {
+      return await dio.post('https://plutter.herokuapp.com/',
+          data: {
+            "emialId": emial,
+            "password": password,
+          },
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+        msg: e.response.data['msg'],
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
+  }
 }

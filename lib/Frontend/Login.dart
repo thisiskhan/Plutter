@@ -8,8 +8,7 @@ import 'package:plutter/Frontend/Home.dart';
 import 'package:plutter/Frontend/ViewPost.dart';
 import 'package:provider/provider.dart';
 import 'CreateAccount.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'Soc_Cha_Com.dart';
+
 
 // Login Screen hai ye
 class Login extends StatefulWidget {

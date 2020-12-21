@@ -9,6 +9,7 @@ import 'Camera.dart';
 import 'Chat.dart';
 import 'Notification.dart';
 import 'Profile.dart';
+import 'PlutterWorkSpace.dart';
 
 class PlutterHomePage extends StatefulWidget {
   @override
@@ -114,18 +115,14 @@ class _HomeState extends State<Home> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Chat()));
         },
-        child: Icon(Icons.message_outlined, size: 35, color: Colors.black),
+        child: Icon(Icons.chat_outlined, size: 35, color: Colors.black),
         backgroundColor: Colors.white,
       ),
       appBar: AppBar(
         leading: GestureDetector(
             onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Eshop())),
-            child: Icon(
-              MdiIcons.shoppingOutline,
-              size: 30,
-              color: Colors.black,
-            )),
+                context, MaterialPageRoute(builder: (context) => PlutterWorkSpace())),
+            child:Icon(Icons.business_center_outlined,color: Colors.black, size: 30,),),
         elevation: 0,
         backgroundColor: Colors.white,
         title: Center(

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:plutter/Frontend/Eshop.dart';
 import 'package:plutter/Frontend/Explore.dart';
 import 'package:plutter/Widgets/progress.dart';
 import 'Activity.dart';

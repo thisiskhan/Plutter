@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plutter/Backend/auth.dart';
 import 'package:plutter/Frontend/Createchannelpage.dart';
+import 'package:plutter/Frontend/Home.dart';
 import 'package:plutter/Frontend/Login.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -245,7 +246,8 @@ class _CreateAccountState extends State<CreateAccount> {
                             child: RaisedButton(
                                 color: Colors.blue[800],
                                 onPressed: () {
-                                  
+                                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PlutterHomePage()));
                                 },
                                 child: Text(
                                   'Continue',
